@@ -12,3 +12,4 @@ deploy:
   on:
     tags: true
     repo: Collaborne/kinesis-stream-reader
+  skip_cleanup: true
