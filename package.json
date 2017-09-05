@@ -4,7 +4,7 @@
   "description": "Helper to continuously read from Kinesis streams",
   "main": "index.js",
   "scripts": {
-    "install": "node ./node_modules/.bin/eslint .",
+    "prepare": "eslint .",
     "test": "echo \"Error: no test specified\""
   },
   "repository": {
