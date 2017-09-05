@@ -1,6 +1,6 @@
 {
   "name": "kinesis-stream-reader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Helper to continuously read from Kinesis streams",
   "main": "index.js",
   "scripts": {
