@@ -1,0 +1,33 @@
+{
+  "name": "kinesis-stream-reader",
+  "version": "1.0.0",
+  "description": "Helper to continuously read from Kinesis streams",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Collaborne/kinesis-stream-reader.git"
+  },
+  "keywords": [
+    "Kinesis",
+    "AWS",
+    "stream",
+    "reader"
+  ],
+  "author": "Collaborne",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Collaborne/kinesis-stream-reader/issues"
+  },
+  "homepage": "https://github.com/Collaborne/kinesis-stream-reader#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-collaborne": "^1.1.0"
+  }
+}
