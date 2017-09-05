@@ -1,9 +1,14 @@
 dist: trusty
-group: beta
 sudo: false
+group: beta
 language: node_js
 node_js:
 - lts/boron
+cache:
+  directories:
+  - node_modules
+before_install:
+- if [ -d node_modules ] && [ x$(cat node_modules/.last-node-version 2>/dev/null) != x$(node -e 'console.log(process.version)') ]; then npm rebuild --update-binary && node -e 'console.log(process.version)' > node_modules/.last-node-version; fi
 deploy:
   provider: npm
   email: npm@collaborne.com
@@ -11,5 +16,6 @@ deploy:
     secure: KQxDZK4LVY1xisFoNFWVz9nhXe6fP8s53N5fapld5mdv5RS62NV6oUdTGTQViEcqt4XEMW133aeSOhvk9PNAwzdNkiKd8fHrwCCw2l4Bl7tgmsLnttOPIXlsjwUqaZXL4/UcfDPiOrgw3nWCC7u9R5XLV51xYNPcN/GYSZFGYuAe+rYMKl6rfIqviZVWwim2vIAskfLIColl75GU7NytXrxraf4K8WVKAK53LquAHGntJxgqWWg79LoyoQGukNmCm/yf0+2o5oR9IEjL4mDzUttyc2crjNm5qkM4NWt7LXt9OiUhHJCffTdbWXShK1eXyqhmFs5J7faR/SiOU5G4PwNL9l/6lqdrhKKL5NYUsZeXUXN3kReDPs4Oyy4WHGDnEMaQfqR/2ItTHF0sA4qWniCzb/kcJbmhksFV+s3VyRb5m4nZABC4qcv+jf1q8Va/c72Gnlh5aJWohqKIvOxWolrgEG96KTcGQqvN5+FMnTpAAwpLbKQPjJQvXhIZCXgJeQ6yD6/jX3Hv7I/p2USz4J0oSB7OfiaqZViSGtn4v8/c/FG8U1Ji6QEG30eFrnweuU9bmRPtwx6j7k0lzcRu4gStE/+rn9F/KLW/00aRLvuucbCZ2QAzAGbKL+bgPBOlh5TwZonX8Ds9mHugbwHAyXzsdWjxakI/3cmJZ8Mbpaw=
   on:
     tags: true
+    condition: $(node -e 'console.log("v" + require("./package.json").version)') = ${TRAVIS_TAG}
     repo: Collaborne/kinesis-stream-reader
   skip_cleanup: true
