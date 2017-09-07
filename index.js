@@ -73,6 +73,9 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 					this.infiniteGetIterator(streamName, shardId);
 				} else {
 					console.warn(`${streamName}: Iterator failed: ${JSON.stringify(err)}`);
+
+					// Keep promise in reject state
+					throw err;
 				}
 			});
 	}
