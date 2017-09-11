@@ -103,7 +103,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 		}
 		return this.kinesis.getShardIterator(params).promise()
 			.then(shardIteratordata => {
-				console.debug(`${streamName}: New iterator is ${shardIteratordata.ShardIterator} (starting at ${lastSeqNo})`);
+				console.log(`${streamName}: New iterator is ${shardIteratordata.ShardIterator} (starting at ${lastSeqNo})`);
 				return shardIteratordata.ShardIterator;
 			});
 	}
