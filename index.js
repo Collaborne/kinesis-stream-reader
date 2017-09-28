@@ -147,7 +147,10 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 		for (const record of recordsData.Records) {
 			const stringData = new Buffer(record.Data, 'base64').toString();
 			const event = JSON.parse(stringData);
-			this.eventHandler(event);
+			const isRejected = _.get(event, 'is_rejected', false);
+			if (!isRejected) {
+				this.eventHandler(event);
+			}
 		}
 		// Save sequence number of the last record read
 		// so next iterator will start from here
