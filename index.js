@@ -12,7 +12,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 
 	/**
 	 * Creates an instance of KinesisStreamReader
-	 * 
+	 *
 	 * @param {Function} eventHandler Function that is called for each received event
 	 * @param {Object} kinesis Reference to AWS kinesis object
 	 */
@@ -26,7 +26,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 	 * Starts consuming events from all input streams
 	 *
 	 * @param {String} streamName Names of the input stream
-	 * @return {Promise} Promise 
+	 * @return {Promise} Promise
 	 */
 	start(streamName) {
 		return this.getShards(streamName)
@@ -39,7 +39,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 
 	/**
 	 * Finds all shared of a stream
-	 * 
+	 *
 	 * @param {string} streamName Name of the Kinesis stream
 	 * @returns {Promise} Resolves to Shard objects
 	 */
@@ -59,7 +59,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 
 	/**
 	 * Continously reads records from a shard. The iterator is automatically renewed.
-	 * 
+	 *
 	 * @param {string} streamName Name of the Kinesis stream
 	 * @param {string} shardId ID of the Kinesis shard
 	 * @returns {void}
@@ -83,7 +83,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 	/**
 	 * Creates an iterator reading from the latest - or optionally
 	 * from a specific sequence number
-	 * 
+	 *
 	 * @param {string} streamName Name of the Kinesis stream
 	 * @param {string} shardId ID of the Kinesis shard
 	 * @param {string} lastSeqNo (Optional) last sequence number from where to read
@@ -110,7 +110,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 
 	/**
 	 * Reads records from a Kinesis iterator
-	 * 
+	 *
 	 * @param {Object} iterator Kinesis iterator
 	 * @returns {Promise} Promise
 	 */
@@ -139,7 +139,7 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 
 	/**
 	 * Extracts data from received Kinesis records and call the event handler
-	 * 
+	 *
 	 * @param {Object} recordsData Received Kinesis records
 	 * @returns {void}
 	 */
