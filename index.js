@@ -8,7 +8,7 @@ const POLL_INTERVAL = 1000;
 /**
  * Consume events from a Kinesis stream.
  */
-module.exports = class KinesisStreamReader { // eslint-disable-line padded-blocks
+class KinesisStreamReader { // eslint-disable-line padded-blocks
 
 	/**
 	 * Creates an instance of KinesisStreamReader
@@ -157,4 +157,6 @@ module.exports = class KinesisStreamReader { // eslint-disable-line padded-block
 		const lastRecord = _.last(recordsData.Records);
 		this.lastSeqNo = _.get(lastRecord, 'SequenceNumber');
 	}
-};
+}
+
+module.exports = KinesisStreamReader;
