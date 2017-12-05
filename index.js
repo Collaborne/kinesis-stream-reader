@@ -68,12 +68,18 @@ class KinesisStreamReader { // eslint-disable-line padded-blocks
 		this.getIterator(streamName, shardId, this.lastSeqNo)
 			.then(shardIterator => this.infiniteGetRecords(shardIterator))
 			.catch(err => {
+				switch (err.code) {
 				// If iterator is expired, get a new one
-				if (err.code === 'ExpiredIteratorException') {
+				case 'ExpiredIteratorException':
 					this.infiniteGetIterator(streamName, shardId);
-				} else {
+					break;
+				// Be graceful in case of network temporary failures
+				case 'NetworkingError':
+					console.warn(`${streamName}: Network error: ${JSON.stringify(err)}, retry...`);
+					this.infiniteGetIterator(streamName, shardId);
+					break;
+				default:
 					console.warn(`${streamName}: Iterator failed: ${JSON.stringify(err)}`);
-
 					// Keep promise in reject state
 					throw err;
 				}
