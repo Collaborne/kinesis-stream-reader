@@ -78,6 +78,15 @@ class KinesisStreamReader { // eslint-disable-line padded-blocks
 					console.warn(`${streamName}: Network error: ${JSON.stringify(err)}, retry...`);
 					this.infiniteGetIterator(streamName, shardId);
 					break;
+				// Log and handle also ProvisionedThroughputExceededException
+				case 'ProvisionedThroughputExceededException':
+					console.warn(`${streamName}: Throughput exceeded: ${JSON.stringify(err)}, retry...`);
+					if (err.retryable) {
+						this.infiniteGetIterator(streamName, shardId);
+					} else {
+						throw err;
+					}
+					break;
 				default:
 					console.warn(`${streamName}: Iterator failed: ${JSON.stringify(err)}`);
 					// Keep promise in reject state
